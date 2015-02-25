@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Helper to add a child element to the attached menu.
+ * By added a child with this helper, if the route of the request match the route of the child, this route will have
+ * '#' as URI and will be set as activated.
  *
  * @package Yrdif\BlogBundle\Menu
  */
