@@ -1,0 +1,4 @@
+services:
+#    yrdif_blog.example:
+#        class: Yrdif\BlogBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

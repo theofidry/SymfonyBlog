@@ -1,0 +1,4 @@
+yrdif_blog:
+    resource: "@YrdifBlogBundle/Resources/config/routing.yml"
+    prefix:   /
+

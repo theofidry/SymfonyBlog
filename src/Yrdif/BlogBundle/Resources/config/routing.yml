@@ -1,0 +1,11 @@
+yrdif_blog_homepage:
+    path:     /
+    defaults: { _controller: YrdifBlogBundle:Page:index }
+    requirements:
+        _method: GET
+
+yrdif_blog_about:
+    path:     /about
+    defaults: { _controller: YrdifBlogBundle:Page:about }
+    requirements:
+        _method: GET
