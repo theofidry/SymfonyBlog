@@ -1,0 +1,22 @@
+Yrdif\BlogBundle\Entity\ContactRequest:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        email:
+            type: string
+            length: 255
+        subject:
+            type: string
+            length: 255
+        content:
+            type: text
+    lifecycleCallbacks: {  }

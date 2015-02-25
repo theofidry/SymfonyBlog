@@ -28,6 +28,8 @@ framework:
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
+    form_themes:
+        - 'bootstrap_3_horizontal_layout.html.twig'
     strict_variables: "%kernel.debug%"
 
 # Assetic Configuration

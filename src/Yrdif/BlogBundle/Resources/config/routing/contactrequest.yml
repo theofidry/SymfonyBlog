@@ -1,0 +1,34 @@
+contact-request:
+    path:     /requests
+    defaults: { _controller: "YrdifBlogBundle:ContactRequest:index" }
+    methods:  GET
+
+contact-request_show:
+    path:     /{id}/show
+    defaults: { _controller: "YrdifBlogBundle:ContactRequest:show" }
+    methods:  GET
+
+contact-request_new:
+    path:     /
+    defaults: { _controller: "YrdifBlogBundle:ContactRequest:new" }
+    methods:  GET
+
+contact-request_create:
+    path:     /create
+    defaults: { _controller: "YrdifBlogBundle:ContactRequest:create" }
+    methods:  POST
+
+contact-request_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "YrdifBlogBundle:ContactRequest:edit" }
+    methods:  GET
+
+contact-request_update:
+    path:     /{id}/update
+    defaults: { _controller: "YrdifBlogBundle:ContactRequest:update" }
+    methods:  [POST, PUT]
+
+contact-request_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "YrdifBlogBundle:ContactRequest:delete" }
+    methods:  [POST, DELETE]

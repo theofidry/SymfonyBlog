@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @package Yrdif\BlogBundle\Menu
  */
+//TODO: tests unit
 class Builder extends ContainerAware
 {
 
@@ -29,7 +30,8 @@ class Builder extends ContainerAware
 
         $helper
             ->addChild('Home', 'yrdif_blog_homepage')
-            ->addChild('About', 'yrdif_blog_about');
+            ->addChild('About', 'yrdif_blog_about')
+            ->addChild('Contact', 'contact-request_new');
 
         return $menu;
     }
