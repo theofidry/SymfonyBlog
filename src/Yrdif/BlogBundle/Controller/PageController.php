@@ -17,7 +17,16 @@ class PageController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('YrdifBlogBundle:Page:index.html.twig');
+        $repository = $this->getDoctrine()->getRepository('YrdifBlogBundle:Post');
+
+        $posts = $repository->findAllOrderedByCreatedAt();
+
+        return $this->render(
+            'YrdifBlogBundle:Page:index.html.twig',
+            [
+                'posts' => $posts
+            ]
+        );
     }
 
     /**

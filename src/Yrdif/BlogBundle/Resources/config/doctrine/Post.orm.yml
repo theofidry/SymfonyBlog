@@ -1,6 +1,7 @@
 Yrdif\BlogBundle\Entity\Post:
     type:  entity
     table: null
+    repositoryClass: Yrdif\BlogBundle\Entity\PostRepository
     id:
         id:
             type: integer
