@@ -5,19 +5,19 @@ namespace Yrdif\BlogBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Yrdif\BlogBundle\Entity\ContactRequest;
-use Yrdif\BlogBundle\Form\ContactRequestType;
+use Yrdif\BlogBundle\Entity\Post;
+use Yrdif\BlogBundle\Form\PostType;
 
 /**
- * ContactRequest controller.
+ * Post controller.
  *
  * @package Yrdif\BlogBundle\Controller
  */
-class ContactRequestController extends Controller
+class PostController extends Controller
 {
 
     /**
-     * Lists all ContactRequest entities.
+     * Lists all Post entities.
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -25,10 +25,10 @@ class ContactRequestController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('YrdifBlogBundle:ContactRequest')->findAll();
+        $entities = $em->getRepository('YrdifBlogBundle:Post')->findAll();
 
         return $this->render(
-            'YrdifBlogBundle:ContactRequest:index.html.twig',
+            'YrdifBlogBundle:Post:index.html.twig',
             [
                 'entities' => $entities,
             ]
@@ -36,7 +36,7 @@ class ContactRequestController extends Controller
     }
 
     /**
-     * Creates a new ContactRequest entity.
+     * Creates a new Post entity.
      *
      * @param Request $request
      *
@@ -44,38 +44,27 @@ class ContactRequestController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new ContactRequest();
+        $entity = new Post();
+
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
-            // Commit entity to database.
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            // Send email to the user.
-            $mailer = $this->get('mailer');
-            $mailer->send(
-                $mailer->createMessage()
-                    ->setSubject($form->get('subject')->getData())
-                    ->setFrom(['bot@symblog.fr' => 'Symblog Bot'])
-                    ->setTo([$form->get('email')->getData() => $form->get('name')->getData()])
-                    ->setBody($form->get('content')->getData())
-            );
-
             // Notify the user
             $request->getSession()->getFlashBag()->add(
                 'success',
-                'Your request was successfully sent.'
+                'The post has been created.'
             );
 
-            return $this->redirect($this->generateUrl('contact-request_show', ['id' => $entity->getId()]));
+            return $this->redirect($this->generateUrl('post_show', ['id' => $entity->getId()]));
         }
 
         return $this->render(
-            'YrdifBlogBundle:ContactRequest:new.html.twig',
+            'YrdifBlogBundle:Post:new.html.twig',
             [
                 'entity' => $entity,
                 'form'   => $form->createView(),
@@ -84,17 +73,19 @@ class ContactRequestController extends Controller
     }
 
     /**
-     * Displays a form to create a new ContactRequest entity.
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * Displays a form to create a new Post entity.
+
      */
     public function newAction()
     {
-        $entity = new ContactRequest();
+        $entity = new Post();
         $form = $this->createCreateForm($entity);
+        $form
+            ->remove('createdAt')
+            ->remove('updatedAt');
 
         return $this->render(
-            'YrdifBlogBundle:ContactRequest:new.html.twig',
+            'YrdifBlogBundle:Post:new.html.twig',
             [
                 'entity' => $entity,
                 'form'   => $form->createView(),
@@ -103,7 +94,7 @@ class ContactRequestController extends Controller
     }
 
     /**
-     * Finds and displays a ContactRequest entity.
+     * Finds and displays a Post entity.
      *
      * @param int $id
      *
@@ -113,16 +104,16 @@ class ContactRequestController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('YrdifBlogBundle:ContactRequest')->find($id);
+        $entity = $em->getRepository('YrdifBlogBundle:Post')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ContactRequest entity.');
+            throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render(
-            'YrdifBlogBundle:ContactRequest:show.html.twig',
+            'YrdifBlogBundle:Post:show.html.twig',
             [
                 'entity'      => $entity,
                 'delete_form' => $deleteForm->createView(),
@@ -131,7 +122,7 @@ class ContactRequestController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing ContactRequest entity.
+     * Displays a form to edit an existing Post entity.
      *
      * @param int $id
      *
@@ -141,17 +132,17 @@ class ContactRequestController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('YrdifBlogBundle:ContactRequest')->find($id);
+        $entity = $em->getRepository('YrdifBlogBundle:Post')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ContactRequest entity.');
+            throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render(
-            'YrdifBlogBundle:ContactRequest:edit.html.twig',
+            'YrdifBlogBundle:Post:edit.html.twig',
             [
                 'entity'      => $entity,
                 'edit_form'   => $editForm->createView(),
@@ -161,7 +152,7 @@ class ContactRequestController extends Controller
     }
 
     /**
-     * Edits an existing ContactRequest entity.
+     * Edits an existing Post entity.
      *
      * @param Request $request
      * @param int     $id
@@ -172,10 +163,10 @@ class ContactRequestController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('YrdifBlogBundle:ContactRequest')->find($id);
+        $entity = $em->getRepository('YrdifBlogBundle:Post')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ContactRequest entity.');
+            throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -188,14 +179,14 @@ class ContactRequestController extends Controller
             // Notify the user
             $request->getSession()->getFlashBag()->add(
                 'success',
-                'The contact request has been updated.'
+                'The post has been updated.'
             );
 
-            return $this->redirect($this->generateUrl('contact-request_show', ['id' => $id]));
+            return $this->redirect($this->generateUrl('post_show', ['id' => $id]));
         }
 
         return $this->render(
-            'YrdifBlogBundle:ContactRequest:edit.html.twig',
+            'YrdifBlogBundle:Post:edit.html.twig',
             [
                 'entity'      => $entity,
                 'edit_form'   => $editForm->createView(),
@@ -205,7 +196,7 @@ class ContactRequestController extends Controller
     }
 
     /**
-     * Deletes a ContactRequest entity.
+     * Deletes a Post entity.
      *
      * @param Request $request
      * @param int     $id
@@ -219,10 +210,10 @@ class ContactRequestController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('YrdifBlogBundle:ContactRequest')->find($id);
+            $entity = $em->getRepository('YrdifBlogBundle:Post')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find ContactRequest entity.');
+                throw $this->createNotFoundException('Unable to find Post entity.');
             }
 
             $em->remove($entity);
@@ -231,27 +222,27 @@ class ContactRequestController extends Controller
             // Notify the user
             $request->getSession()->getFlashBag()->add(
                 'success',
-                'The contact request has been deleted.'
+                'The post has been deleted.'
             );
         }
 
-        return $this->redirect($this->generateUrl('contact-request'));
+        return $this->redirect($this->generateUrl('post'));
     }
 
     /**
-     * Creates a form to create a ContactRequest entity.
+     * Creates a form to create a Post entity.
      *
-     * @param ContactRequest $entity The entity
+     * @param Post $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(ContactRequest $entity)
+    private function createCreateForm(Post $entity)
     {
         $form = $this->createForm(
-            new ContactRequestType(),
+            new PostType(),
             $entity,
             [
-                'action' => $this->generateUrl('contact-request_create'),
+                'action' => $this->generateUrl('post_create'),
                 'method' => 'POST',
             ]
         );
@@ -262,19 +253,19 @@ class ContactRequestController extends Controller
     }
 
     /**
-     * Creates a form to edit a ContactRequest entity.
+     * Creates a form to edit a Post entity.
      *
-     * @param ContactRequest $entity The entity
+     * @param Post $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditForm(ContactRequest $entity)
+    private function createEditForm(Post $entity)
     {
         $form = $this->createForm(
-            new ContactRequestType(),
+            new PostType(),
             $entity,
             [
-                'action' => $this->generateUrl('contact-request_update', ['id' => $entity->getId()]),
+                'action' => $this->generateUrl('post_update', ['id' => $entity->getId()]),
                 'method' => 'PUT',
             ]
         );
@@ -285,7 +276,7 @@ class ContactRequestController extends Controller
     }
 
     /**
-     * Creates a form to delete a ContactRequest entity by id.
+     * Creates a form to delete a Post entity by id.
      *
      * @param int $id The entity id
      *
@@ -294,7 +285,7 @@ class ContactRequestController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('contact-request_delete', ['id' => $id]))
+            ->setAction($this->generateUrl('post_delete', ['id' => $id]))
             ->setMethod('DELETE')
             ->add('submit', 'submit', ['label' => 'Delete'])
             ->getForm();

@@ -7,6 +7,8 @@ contact-request_show:
     path:     /{id}
     defaults: { _controller: "YrdifBlogBundle:ContactRequest:show" }
     methods:  GET
+    requirements:
+        id:   \d+
 
 contact-request_new:
     path:     /
@@ -22,13 +24,19 @@ contact-request_edit:
     path:     /{id}/edit
     defaults: { _controller: "YrdifBlogBundle:ContactRequest:edit" }
     methods:  GET
+    requirements:
+        id:   \d+
 
 contact-request_update:
     path:     /{id}
     defaults: { _controller: "YrdifBlogBundle:ContactRequest:update" }
     methods:  [POST, PUT]
+    requirements:
+        id:   \d+
 
 contact-request_delete:
     path:     /{id}/delete
     defaults: { _controller: "YrdifBlogBundle:ContactRequest:delete" }
     methods:  [POST, DELETE]
+    requirements:
+        id:   \d+

@@ -1,0 +1,32 @@
+Yrdif\BlogBundle\Entity\Post:
+    type:  entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type:   string
+            length: 255
+        author:
+            type:   string
+            length: 255
+        content:
+            type: text
+        image:
+            type:   string
+            length: 255
+        tags:
+            type: text
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+    lifecycleCallbacks:
+        prePersist:
+            - setCreatedAtValue
+            - setUpdatedAtValue
+        preUpdate:  [setUpdatedAtValue]

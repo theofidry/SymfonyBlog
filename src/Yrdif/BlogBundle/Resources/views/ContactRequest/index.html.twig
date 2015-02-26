@@ -9,7 +9,7 @@
     <table class="records_list table">
         <thead>
         <tr>
-            <th>Id</th>
+            <th>#</th>
             <th>Name</th>
             <th>Email</th>
             <th>Subject</th>
@@ -29,10 +29,15 @@
                     <ul class="action-list">
                         <li>
                             <a href="{{ path('contact-request_show', { 'id': entity.id }) }}"
-                               class="btn btn-info">show</a>
+                               class="btn btn-info">
+                                show
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ path('contact-request_edit', { 'id': entity.id }) }}" class="btn btn-warning">edit</a>
+                            <a href="{{ path('contact-request_edit', { 'id': entity.id }) }}"
+                               class="btn btn-warning">
+                                edit
+                            </a>
                         </li>
                     </ul>
                 </td>

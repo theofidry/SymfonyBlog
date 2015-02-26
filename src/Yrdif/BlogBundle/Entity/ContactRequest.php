@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 //TODO: refactor this string check-cast
 class ContactRequest
 {
+
     /**
      * @var integer
      */
@@ -41,7 +42,7 @@ class ContactRequest
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer|null
      */
     public function getId()
     {
@@ -51,7 +52,8 @@ class ContactRequest
     /**
      * Set name
      *
-     * @param string $name
+     * @param string|null $name
+     *
      * @return $this
      */
     public function setName($name)
@@ -65,7 +67,7 @@ class ContactRequest
     /**
      * Get name
      *
-     * @return string 
+     * @return string|null
      */
     public function getName()
     {
@@ -75,7 +77,8 @@ class ContactRequest
     /**
      * Set email
      *
-     * @param string $email
+     * @param string|null $email
+     *
      * @return $this
      */
     public function setEmail($email)
@@ -89,7 +92,7 @@ class ContactRequest
     /**
      * Get email
      *
-     * @return string 
+     * @return string|null
      */
     public function getEmail()
     {
@@ -99,7 +102,8 @@ class ContactRequest
     /**
      * Set subject
      *
-     * @param string $subject
+     * @param string|null $subject
+     *
      * @return $this
      */
     public function setSubject($subject)
@@ -113,7 +117,7 @@ class ContactRequest
     /**
      * Get subject
      *
-     * @return string 
+     * @return string |null
      */
     public function getSubject()
     {
@@ -123,7 +127,8 @@ class ContactRequest
     /**
      * Set content
      *
-     * @param string $content
+     * @param string|null $content
+     *
      * @return $this
      */
     public function setContent($content)
@@ -137,7 +142,7 @@ class ContactRequest
     /**
      * Get content
      *
-     * @return string 
+     * @return string|null
      */
     public function getContent()
     {

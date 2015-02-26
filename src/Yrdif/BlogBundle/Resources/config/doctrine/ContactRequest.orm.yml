@@ -1,5 +1,5 @@
 Yrdif\BlogBundle\Entity\ContactRequest:
-    type: entity
+    type:  entity
     table: null
     id:
         id:
@@ -9,13 +9,13 @@ Yrdif\BlogBundle\Entity\ContactRequest:
                 strategy: AUTO
     fields:
         name:
-            type: string
+            type:   string
             length: 255
         email:
-            type: string
+            type:   string
             length: 255
         subject:
-            type: string
+            type:   string
             length: 255
         content:
             type: text

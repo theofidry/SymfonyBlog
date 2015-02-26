@@ -1,0 +1,42 @@
+post:
+    path:     /
+    defaults: { _controller: "YrdifBlogBundle:Post:index" }
+    methods:  GET
+
+post_show:
+    path:     /{id}
+    defaults: { _controller: "YrdifBlogBundle:Post:show" }
+    methods:  GET
+    requirements:
+        id:   \d+
+
+post_new:
+    path:     /new
+    defaults: { _controller: "YrdifBlogBundle:Post:new" }
+    methods:  GET
+
+post_create:
+    path:     /new
+    defaults: { _controller: "YrdifBlogBundle:Post:create" }
+    methods:  POST
+
+post_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "YrdifBlogBundle:Post:edit" }
+    methods:  GET
+    requirements:
+        id:   \d+
+
+post_update:
+    path:     /{id}
+    defaults: { _controller: "YrdifBlogBundle:Post:update" }
+    methods:  [POST, PUT]
+    requirements:
+        id:   \d+
+
+post_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "YrdifBlogBundle:Post:delete" }
+    methods:  [POST, DELETE]
+    requirements:
+        id:   \d+
