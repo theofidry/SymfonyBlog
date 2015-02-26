@@ -4,7 +4,7 @@ namespace Yrdif\BlogBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class ContactRequestType
@@ -13,9 +13,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ContactRequestType extends AbstractType
 {
+
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -23,18 +24,21 @@ class ContactRequestType extends AbstractType
             ->add('name')
             ->add('email')
             ->add('subject')
-            ->add('content')
-        ;
+            ->add('content');
     }
-    
+
     /**
-     * @param OptionsResolver $resolver
+     * Defines options for the form type that can be used in buildForm() and buildView().
+     *
+     * @param OptionsResolverInterface $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'Yrdif\BlogBundle\Entity\ContactRequest'
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => 'Yrdif\BlogBundle\Entity\ContactRequest'
+            ]
+        );
     }
 
     /**

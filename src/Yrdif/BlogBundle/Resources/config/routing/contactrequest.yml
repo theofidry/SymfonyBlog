@@ -4,7 +4,7 @@ contact-request:
     methods:  GET
 
 contact-request_show:
-    path:     /{id}/show
+    path:     /{id}
     defaults: { _controller: "YrdifBlogBundle:ContactRequest:show" }
     methods:  GET
 
@@ -14,7 +14,7 @@ contact-request_new:
     methods:  GET
 
 contact-request_create:
-    path:     /create
+    path:     /
     defaults: { _controller: "YrdifBlogBundle:ContactRequest:create" }
     methods:  POST
 
@@ -24,7 +24,7 @@ contact-request_edit:
     methods:  GET
 
 contact-request_update:
-    path:     /{id}/update
+    path:     /{id}
     defaults: { _controller: "YrdifBlogBundle:ContactRequest:update" }
     methods:  [POST, PUT]
 

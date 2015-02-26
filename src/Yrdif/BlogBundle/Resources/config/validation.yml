@@ -1,0 +1,18 @@
+Yrdif\BlogBundle\Entity\ContactRequest:
+    properties:
+        name:
+            - NotBlank: ~
+            - Length:
+                min: 2
+        email:
+            - NotBlank: ~
+            - Email:
+        subject:
+            - NotBlank: ~
+            - Length:
+                min: 5
+                max: 140
+        content:
+            - NotBlank: ~
+            - Length:
+                min: 3
