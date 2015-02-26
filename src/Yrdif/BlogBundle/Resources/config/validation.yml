@@ -10,7 +10,7 @@ Yrdif\BlogBundle\Entity\ContactRequest:
         subject:
             - NotBlank: ~
             - Length:
-                min: 5
+                min: 2
                 max: 140
         content:
             - NotBlank: ~

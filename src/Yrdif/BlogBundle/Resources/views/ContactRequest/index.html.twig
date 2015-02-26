@@ -6,16 +6,16 @@
         <h1>Contact Requests</h1>
     </div>
 
-    <table class="records_list">
+    <table class="records_list table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Subject</th>
-                <th>Content</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Content</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
@@ -26,25 +26,26 @@
                 <td>{{ entity.subject }}</td>
                 <td>{{ entity.content }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('contact-request_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('contact-request_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    <ul class="action-list">
+                        <li>
+                            <a href="{{ path('contact-request_show', { 'id': entity.id }) }}"
+                               class="btn btn-info">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('contact-request_edit', { 'id': entity.id }) }}" class="btn btn-warning">edit</a>
+                        </li>
+                    </ul>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
+    <ul class="no-list">
         <li>
-            <a href="{{ path('contact-request_new') }}">
+            <a href="{{ path('contact-request_new') }}" class="btn btn-default">
                 Create a new entry
             </a>
         </li>
     </ul>
-    {% endblock %}
+{% endblock %}

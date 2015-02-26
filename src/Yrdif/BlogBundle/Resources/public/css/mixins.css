@@ -1,0 +1,7 @@
+/*
+Removes the list decoration and margin.
+*/
+ul.no-list {
+  list-style:  none;
+  margin-left: 0;
+}

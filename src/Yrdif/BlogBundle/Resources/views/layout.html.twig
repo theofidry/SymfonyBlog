@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {% stylesheets 'bundles/yrdifblog/css/**/*' filter='cssrewrite' %}
+    {% stylesheets 'bundles/yrdifblog/css/*' 'bundles/yrdifblog/css/**/*' filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock %}
