@@ -68,6 +68,10 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
 
+hautelook_alice:
+    locale: en_US   # default
+    seed: 1         # default
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"

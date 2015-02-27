@@ -48,16 +48,18 @@
         </div>
 
         {# Body #}
-        <div class="row">
-            <div class="col-sm-8">
-                {% block body %}{% endblock %}
-            </div>
+        {% block body_layout %}
+            <div class="row">
+                <div class="col-sm-8">
+                    {% block body %}{% endblock %}
+                </div>
 
-            {# Sidebar #}
-            <div class="col-sm-3 col-sm-offset-1" id="sidebar">
-                {% include '::sidebar.html.twig' %}
+                {# Sidebar #}
+                <div class="col-sm-3 col-sm-offset-1" id="sidebar">
+                    {% include '::sidebar.html.twig' %}
+                </div>
             </div>
-        </div>
+        {% endblock %}
 
         {# Footer #}
         <div class="row">

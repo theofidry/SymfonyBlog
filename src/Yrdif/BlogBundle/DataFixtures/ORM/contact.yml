@@ -1,0 +1,6 @@
+Yrdif\BlogBundle\Entity\ContactRequest:
+    contact_request_{1..100}:
+        name: <name()>
+        email: <email()>
+        subject: <sentence(6)>
+        content: <text()>

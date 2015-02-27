@@ -5,3 +5,17 @@ ul.no-list {
   list-style:  none;
   margin-left: 0;
 }
+
+/*
+Change cursor on row hover.
+*/
+tr.row-link:hover {
+  cursor: pointer;
+}
+
+/*
+Vertically align table row or cell content.
+*/
+tr.vertical-align td, td.vertical-align {
+  vertical-align: middle !important;
+}
