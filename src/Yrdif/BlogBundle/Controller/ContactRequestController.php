@@ -5,6 +5,7 @@ namespace Yrdif\BlogBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
 use Yrdif\BlogBundle\Entity\ContactRequest;
 use Yrdif\BlogBundle\Form\ContactRequestType;
 
@@ -178,12 +179,11 @@ class ContactRequestController extends Controller
             throw $this->createNotFoundException('Unable to find ContactRequest entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $em->flush();
+            $em->flgenreush();
 
             // Notify the user
             $request->getSession()->getFlashBag()->add(
@@ -192,16 +192,14 @@ class ContactRequestController extends Controller
             );
 
             return $this->redirect($this->generateUrl('contact-request_show', ['id' => $id]));
+        } else {
+            $request->getSession()->getFlashBag()->add(
+                'error',
+                'The contact request could not be deleted.'
+            );
         }
 
-        return $this->render(
-            'YrdifBlogBundle:ContactRequest:edit.html.twig',
-            [
-                'entity'      => $entity,
-                'edit_form'   => $editForm->createView(),
-                'delete_form' => $deleteForm->createView(),
-            ]
-        );
+        return $this->redirect($request->headers->get('referer'));
     }
 
     /**
@@ -233,9 +231,16 @@ class ContactRequestController extends Controller
                 'success',
                 'The contact request has been deleted.'
             );
+
+            return $this->redirect($this->generateUrl('contact-request'));
+        } else {
+            $request->getSession()->getFlashBag()->add(
+                'error',
+                'The contact request could not be deleted.'
+            );
         }
 
-        return $this->redirect($this->generateUrl('contact-request'));
+        return $this->redirect($request->headers->get('referer'));
     }
 
     /**
@@ -266,7 +271,7 @@ class ContactRequestController extends Controller
      *
      * @param ContactRequest $entity The entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return \Symfony\Component\Form\Form The formdeleteAction
      */
     private function createEditForm(ContactRequest $entity)
     {

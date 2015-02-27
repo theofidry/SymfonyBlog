@@ -30,13 +30,13 @@ contact-request_edit:
 contact-request_update:
     path:     /{id}
     defaults: { _controller: "YrdifBlogBundle:ContactRequest:update" }
-    methods:  [POST, PUT]
+    methods:  PUT
     requirements:
         id:   \d+
 
 contact-request_delete:
-    path:     /{id}/delete
+    path:     /{id}
     defaults: { _controller: "YrdifBlogBundle:ContactRequest:delete" }
-    methods:  [POST, DELETE]
+    methods:  DELETE
     requirements:
         id:   \d+

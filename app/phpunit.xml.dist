@@ -4,8 +4,9 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
          backupGlobals="false"
-         colors="true"
          bootstrap="bootstrap.php.cache"
+         colors="true"
+         report-useless-tests="true"
 >
     <testsuites>
         <testsuite name="Project Test Suite">

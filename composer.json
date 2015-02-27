@@ -30,6 +30,7 @@
     "phpmd/phpmd": "@stable"
   },
   "scripts": {
+    "database:populate": "php app/console doctrine:fixtures:load",
     "test": "phpunit -c app",
     "post-root-package-install": [
       "SymfonyStandard\\Composer::hookRootPackageInstall"

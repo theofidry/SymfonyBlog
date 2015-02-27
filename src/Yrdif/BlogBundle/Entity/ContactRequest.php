@@ -13,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
 class ContactRequest
 {
 
+    use EntityHydrationTrait;
+
     /**
      * @var integer
      */

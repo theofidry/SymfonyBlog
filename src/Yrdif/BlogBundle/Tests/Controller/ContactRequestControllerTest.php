@@ -3,9 +3,73 @@
 namespace Yrdif\BlogBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class ContactRequestControllerTest
+ *
+ * @package Yrdif\BlogBundle\Tests\Controller
+ */
 class ContactRequestControllerTest extends WebTestCase
 {
+
+    /**
+     * Test if all pages are reachable (and only that).
+     *
+     * @dataProvider urlProvider
+     *
+     * @param string[] $methods List of HTTP methods verbs.
+     * @param string   $url
+     */
+    public function testPageIsSuccessful($methods, $url)
+    {
+        $client = self::createClient();
+
+        foreach ($methods as $method) {
+            $client->request($method, $url);
+            $this->assertTrue(
+                $client->getResponse()->isSuccessful() || $client->getResponse()->isRedirection(),
+                'Page unreachable: (method, url) => \'response status code\' = ('.$method.', '.$url.') => '. $client->getResponse()->getStatusCode()
+            );
+        }
+    }
+
+
+    //
+    // Data Providers
+    //
+    /**
+     * Provides HTTP method verbs.
+     *
+     * @return array
+     */
+    public function methodsProvider()
+    {
+        return [
+            Request::METHOD_DELETE,
+            Request::METHOD_GET,
+            Request::METHOD_POST,
+            Request::METHOD_PUT
+        ];
+    }
+
+    /**
+     * Provides URL with allowed methods verb.
+     *
+     * @return array
+     */
+    public function urlProvider()
+    {
+        $id = 1;
+
+        return [
+            [[Request::METHOD_GET], '/contact/requests'],
+            [[Request::METHOD_GET, Request::METHOD_PUT, Request::METHOD_DELETE], '/contact/'.$id],
+            [[Request::METHOD_GET], '/contact/'.$id.'/edit'],
+            [[Request::METHOD_GET, Request::METHOD_POST], '/contact/']
+        ];
+    }
+
     /*
     public function testCompleteScenario()
     {
