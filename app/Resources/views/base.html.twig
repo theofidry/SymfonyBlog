@@ -26,22 +26,26 @@
         {# Flash messages #}
         <div class="row">
             {% for flashMessage in app.session.flashbag.get('success') %}
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-dismissible alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     {{ flashMessage }}
                 </div>
             {% endfor %}
             {% for flashMessage in app.session.flashbag.get('notice') %}
-                <div class="alert alert-info" role="alert">
+                <div class="alert alert-dismissible alert-info" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     {{ flashMessage }}
                 </div>
             {% endfor %}
             {% for flashMessage in app.session.flashbag.get('warning') %}
-                <div class="alert alert-warning" role="alert">
+                <div class="alert alert-dismissible alert-warning" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     {{ flashMessage }}
                 </div>
             {% endfor %}
             {% for flashMessage in app.session.flashbag.get('danger') %}
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-dismissible alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     {{ flashMessage }}
                 </div>
             {% endfor %}
