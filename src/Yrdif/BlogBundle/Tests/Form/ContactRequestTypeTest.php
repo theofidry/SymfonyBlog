@@ -48,8 +48,7 @@ class ContactRequestTypeTest extends TypeTestCase
         $form = $this->factory->create($type);
 
         // Instantiate entity with data.
-        $entity = new ContactRequest();
-        $entity->fromArray($formData);
+        $entity = ContactRequest::createFormArray($formData);
 
         // Submit the data to the form directly.
         $form->submit($formData);

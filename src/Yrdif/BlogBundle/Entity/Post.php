@@ -256,7 +256,7 @@ class Post
     /**
      * Set updatedAt
      *
-     * @param \DateTime $date
+     * @param \DateTime|null $date
      *
      * @return $this
      */

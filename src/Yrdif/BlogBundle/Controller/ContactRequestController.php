@@ -183,7 +183,7 @@ class ContactRequestController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $em->flgenreush();
+            $em->flush();
 
             // Notify the user
             $request->getSession()->getFlashBag()->add(

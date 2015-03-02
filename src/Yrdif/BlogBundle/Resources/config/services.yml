@@ -1,4 +1,8 @@
+parameters:
+#    yrdif_blog.example.class: Yrdif\BlogBundle\Example
+    knp_menu.factory.class: Knp\Menu\MenuFactory
+#
 services:
-#    yrdif_blog.example:
-#        class: Yrdif\BlogBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+##    yrdif_blog.example:
+##        class: %yrdif_blog.example.class%
+##        arguments: [@service_id, "plain_value", %parameter%]

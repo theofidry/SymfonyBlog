@@ -47,8 +47,7 @@ class ContactRequestTest extends WebTestCase
      */
     public function testFluentInterface($data)
     {
-        $entity = new ContactRequest();
-        $entity->fromArray($data);
+        $entity = ContactRequest::createFormArray($data);
         $fentity = new ContactRequest();
 
         $fentity
@@ -61,7 +60,7 @@ class ContactRequestTest extends WebTestCase
     }
 
     /**
-     * Test if the entity is properly created and committed.
+     * Test if the entity is properly created and committed (test all constructors).
      *
      * @dataProvider entityProvider
      *
@@ -69,8 +68,7 @@ class ContactRequestTest extends WebTestCase
      */
     public function testNewEntity($data)
     {
-        $entity = new ContactRequest();
-        $entity->fromArray($data);
+        $entity = ContactRequest::createFormArray($data);
 
         $this->em->persist($entity);
         $this->em->flush();
@@ -83,38 +81,66 @@ class ContactRequestTest extends WebTestCase
         $this->assertGreaterThan(1, $count);
     }
 
-    public function testER($data) {
-
-        // Expect to be able to instantiate two identical entities.
-        $entity1 = new ContactRequest();
-        $entity2 = new ContactRequest();
-
-        $entity1->fromArray($data);
-        $entity2->fromArray($data);
-
-        $this->em->commit($entity1);
-        $this->em->commit($entity2);
-        $this->em->flush();
-
-        // Expect no error.
-    }
-
     /**
-     * Test fromArray on entity.
+     * Test entity database properties (relations).
      *
      * @dataProvider entityProvider
      *
      * @param array $data
      */
-    public function testFromArray($data)
+    public function testER($data)
     {
-        $entity = new ContactRequest();
-        $entity->fromArray($data);
+        // Expect to be able to instantiate two identical entities.
+        $entity1 = ContactRequest::createFormArray($data);
+        $entity2 = ContactRequest::createFormArray($data);
 
-        $this->assertEquals($data['name'], $entity->getName());
-        $this->assertEquals($data['email'], $entity->getEmail());
-        $this->assertEquals($data['subject'], $entity->getSubject());
-        $this->assertEquals($data['content'], $entity->getContent());
+        $this->em->commit($entity1);
+        $this->em->commit($entity2);
+        $this->em->flush();
+        // Expect no error.
+    }
+
+    /**
+     * Test all constructors without passing any data.
+     */
+    public function testConstructorsWithoutData()
+    {
+        $entities = [];
+
+        $entities[] = ContactRequest::createFormArray([]);
+        $entities[] = ContactRequest::createFormArray();
+        $entities[] = new ContactRequest();
+        // Expect no error.
+    }
+
+    /**
+     * Test all constructors with data.
+     *
+     * @dataProvider entityProvider
+     *
+     * @param array $data
+     */
+    public function testConstructorsWithData($data)
+    {
+        $entities = [];
+
+        $entities[] = ContactRequest::createFormArray($data);
+
+        $entity = new ContactRequest();
+        $entity
+            ->setName($data['name'])
+            ->setEmail($data['email'])
+            ->setSubject($data['subject'])
+            ->setContent($data['content']);
+        $entities[] = $entity;
+        unset($entity);
+
+        foreach ($entities as $entity) {
+            $this->assertEquals($data['name'], $entity->getName());
+            $this->assertEquals($data['email'], $entity->getEmail());
+            $this->assertEquals($data['subject'], $entity->getSubject());
+            $this->assertEquals($data['content'], $entity->getContent());
+        }
     }
 
     /**

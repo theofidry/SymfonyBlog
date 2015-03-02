@@ -13,13 +13,18 @@ trait EntityHydrationTrait
     /**
      * Fill entity from array.
      *
-     * @param array $data
+     * @param array|null $array
+     *
+     * @return $this
      */
-    public function fromArray($data = [])
-    {
-        foreach ($data as $property => $value) {
+    public static function createFormArray(array $array = null) {
+        $instance = new self;
+
+        foreach ($array as $property => $value) {
             $method = "set{$property}";
-            $this->$method($value);
+            $instance->$method($value);
         }
+
+        return $instance;
     }
 }
